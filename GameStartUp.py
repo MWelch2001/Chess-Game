@@ -5,18 +5,27 @@ import Cell
 
 pygame.init()
 grey = [105,105,105]
-screen = pygame.display.set_mode((840, 840))
+white = [255,255,255]
+beige = [207,185,151]
+screen = pygame.display.set_mode((845, 845))
 screen.fill(grey)
 
 pygame.display.update()
 
 def SetupCells():
-    cells = [[Cell.Cell(((x * 100) + x * 5), ((y * 100) + y * 5), [255,255,255]) for x in range(8)] for y in range(8)]
+    cells = [[Cell.Cell(x, y) for x in range(8)] for y in range(8)]
     return cells
    
 def DrawCells(cells):
-   for cell in cells:
-        cell.draw(screen)
+   colourCounter = 0
+   for x in range (8):
+       for y in range(8):   
+           if colourCounter % 2 == 0:
+            cells[x][y].draw(screen, white)
+           else:
+            cells[x][y].draw(screen, beige)
+           colourCounter += 1
+       colourCounter += 1
 
 cells = SetupCells()
 DrawCells(cells)
